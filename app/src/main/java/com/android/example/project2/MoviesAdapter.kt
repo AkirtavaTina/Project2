@@ -47,13 +47,12 @@ class MoviesAdapter(
                 .into(poster)
             val title : TextView = itemView.findViewById(R.id.title)
             title.text = movie.name
-            Log.d("here", "${movie.name}")
 
             val overview : TextView = itemView.findViewById(R.id.overview)
             overview.text = movie.overview
 
             val rating : TextView = itemView.findViewById(R.id.rating)
-            rating.text = "imdb ${movie.vote}"
+            rating.text = "imdb " + movie.vote
         }
     }
 }
