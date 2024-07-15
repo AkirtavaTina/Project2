@@ -44,12 +44,6 @@ class MoviesFragment : Fragment() {
             moviesAdapter.updateMovies(it)
         })
 
-        moviesViewModel.error.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                Toast.makeText(requireContext(), "Please check your internet connection", Toast.LENGTH_SHORT).show()
-            }
-        })
-
         moviesViewModel.loadMovies()
     }
 
