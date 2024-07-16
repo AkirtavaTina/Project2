@@ -40,11 +40,9 @@ class MoviesFragment : Fragment() {
         moviesAdapter = MoviesAdapter(listOf())
         movies.adapter = moviesAdapter
 
-        moviesViewModel.movies.observe(viewLifecycleOwner, Observer {
+        moviesViewModel.movies.observe(viewLifecycleOwner) {
             moviesAdapter.updateMovies(it)
-        })
-
-        moviesViewModel.loadMovies()
+        }
     }
 
 

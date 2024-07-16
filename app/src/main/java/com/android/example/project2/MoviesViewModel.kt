@@ -9,7 +9,11 @@ class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val _movies = MutableLiveData<List<Movies>>()
     val movies: LiveData<List<Movies>> get() = _movies
 
-    fun loadMovies() {
+    init {
+        loadMovies()
+    }
+
+    private fun loadMovies() {
         repository.getMovies(
             onSuccess = { movies->
                 _movies.postValue(movies)
