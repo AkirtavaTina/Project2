@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.project2.databinding.FragmentMoviesBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoviesFragment : Fragment() {
@@ -17,6 +19,7 @@ class MoviesFragment : Fragment() {
 
     private lateinit var movies: RecyclerView
     private lateinit var moviesAdapter: MoviesAdapter
+    private val moviesViewModel: MoviesViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,12 +40,9 @@ class MoviesFragment : Fragment() {
         moviesAdapter = MoviesAdapter(listOf())
         movies.adapter = moviesAdapter
 
-        MoviesRepository.getMovies(
-            onSuccess = { movies ->
-                moviesAdapter.updateMovies(movies)
-        }, onError = {
-            Toast.makeText(requireContext(), "Please check your internet connection", Toast.LENGTH_SHORT).show()
-        })
+        moviesViewModel.movies.observe(viewLifecycleOwner) {
+            moviesAdapter.updateMovies(it)
+        }
     }
 
 

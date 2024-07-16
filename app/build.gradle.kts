@@ -59,6 +59,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    //glide
     implementation (libs.glide)
     annotationProcessor(libs.compiler)
+
+    //koin
+    implementation(libs.koin.android)
 }
