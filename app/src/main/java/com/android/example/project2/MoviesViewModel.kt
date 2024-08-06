@@ -1,26 +1,26 @@
 package com.android.example.project2
 
+import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 
 
 class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
-    private val _movies = MutableLiveData<List<Movies>>()
-    val movies: LiveData<List<Movies>> get() = _movies
+    val allMovies: LiveData<List<Movies>> get() = repository.allMovies.asLiveData()
 
     init {
         loadMovies()
     }
 
-    private fun loadMovies() {
-        repository.getMovies(
-            onSuccess = { movies->
-                _movies.postValue(movies)
-            },
-            onError = {
-                println("Error fetching movies")
-            }
-        )
+     fun loadMovies(
+//         page:Int,
+//         onSuccess: (movies: List<Movies>)-> Unit
+     ) {
+       Log.d("movie", "here")
+         repository.getMovies(
+//             page,
+//             onSuccess
+         )
     }
 }

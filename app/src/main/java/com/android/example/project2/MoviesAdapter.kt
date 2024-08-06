@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 class MoviesAdapter(
 
-    private var movies: List<Movies>
+    private var movies: MutableList<Movies>
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -24,9 +24,9 @@ class MoviesAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateMovies(movies: List<Movies>) {
-        this.movies = movies
-        notifyDataSetChanged()
+    fun appendMovies(movies: List<Movies>) {
+        this.movies.addAll(movies)
+        notifyItemRangeInserted(this.movies.size, movies.size-1)
     }
 
     inner class MovieViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
