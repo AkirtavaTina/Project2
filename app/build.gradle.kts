@@ -81,4 +81,7 @@ dependencies {
 
     implementation (libs.okhttp)
     implementation (libs.logging.interceptor)
+
+    //paging
+    implementation (libs.androidx.paging.runtime)
 }
