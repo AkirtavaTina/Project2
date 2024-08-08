@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "2.0.0-1.0.23"
 }
 
 android {
@@ -65,4 +66,22 @@ dependencies {
 
     //koin
     implementation(libs.koin.android)
+
+    //coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    //room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    // To use Kotlin Symbol Processing (KSP)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
+
+    //paging
+    implementation (libs.androidx.paging.runtime)
 }
