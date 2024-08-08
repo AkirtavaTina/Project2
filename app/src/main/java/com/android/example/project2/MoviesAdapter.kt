@@ -10,10 +10,7 @@ import com.android.example.project2.databinding.MovieCardBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
-class MoviesAdapter(
-
-    private var movies: MutableList<Movies>
-) : PagingDataAdapter<Movies, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
+class MoviesAdapter() : PagingDataAdapter<Movies, MoviesAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = MovieCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +21,6 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
         if (movie != null) {
-            Log.d("here", "here2 $movie")
             holder.bind(movie)
         }
     }

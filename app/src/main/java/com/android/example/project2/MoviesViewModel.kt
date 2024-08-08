@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import kotlinx.coroutines.launch
 
 
 class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
@@ -20,21 +21,15 @@ class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
     }
 
     private fun loadMovies() {
-        Log.d("movie", "4")
-
-        repository.getMovies(
-            onSuccess = {
-                movies ->   _movies.postValue((movies))
-            },
-            onError = {
-                println("Error fetching movies")
-            }
-        )
-//        onSuccess = { movies->
-//            _movies.postValue(movies)
-//        },
-//        onError = {
-//            println("Error fetching movies")
-//        }
+        viewModelScope.launch {
+            repository.getMovies(
+                onSuccess = { movies ->
+                    _movies.postValue((movies))
+                },
+                onError = {
+                    Log.e("MoviesViewModel", "Error fetching movies")
+                }
+            )
+        }
     }
 }

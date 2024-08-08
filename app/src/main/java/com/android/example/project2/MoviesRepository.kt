@@ -24,23 +24,19 @@ class MoviesRepository (private val movieDao: MovieDao, private val api:MyApi){
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = api.getMovies(page = page)
-
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
                         movieDao.addMovie(responseBody.movies)
                         onSuccess.invoke(responseBody.movies)
-                        Log.d("movie", "3")
-                    }
+                    } else onError()
                 }
                 else {
-                    Log.d("movie", "2")
-                    onError.invoke()
+                    onError()
                 }
             } catch (e: Exception) {
-//                e.printStackTrace()
+                e.printStackTrace()
                 onError.invoke()
-                Log.d("movie", "1")
             }
         }
     }
